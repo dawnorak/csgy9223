@@ -129,3 +129,20 @@ document.getElementById('reading-search').addEventListener('input', renderReadin
 renderScheduleTable(schedule);
 renderReadings();
 
+// Secret easter egg: 5 clicks on the course title within 4 seconds opens egg.html
+(function setupSecretLink() {
+  const titleEl = document.querySelector('.site-header h1');
+  if (!titleEl) return;
+  let clickCount = 0;
+  let resetTimer = null;
+  titleEl.addEventListener('click', () => {
+    clickCount += 1;
+    if (clickCount >= 5) {
+      window.location.href = 'egg.html';
+      return;
+    }
+    clearTimeout(resetTimer);
+    resetTimer = setTimeout(() => { clickCount = 0; }, 4000);
+  });
+})();
+
