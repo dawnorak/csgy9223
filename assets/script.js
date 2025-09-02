@@ -12,15 +12,17 @@ const schedule = [
   ]},
   { part: 'part1', num: 3, title: 'Anti-Discrimination Law and AI', topics: ['Disparate Treatment and Impact', 'Federal Housing Act, Equal Credit Opportunity Act, Title VII of the Civil Rights Act', 'State laws: Colorado Insurance Law, others'], readings: [
     { title: 'Fair ML Book: Legal', url: 'https://fairmlbook.org/legal.html' },
-    { title: 'Race-Aware Algorithms (CLR)', url: 'https://www.californialawreview.org/print/race-aware-algorithms-fairness-nondiscrimination-and-affirmative-action' }
+    { title: 'Race-Aware Algorithms (CLR)', url: 'https://www.californialawreview.org/print/race-aware-algorithms-fairness-nondiscrimination-and-affirmative-action' },
+    { title: 'Less Discriminatory Algorithms', url: 'https://www.law.georgetown.edu/georgetown-law-journal/in-print/volume-113/volume-113-issue-1-october-2024/less-discriminatory-algorithms/' }
   ]},
   { part: 'part1', num: 4, title: 'Privacy, Transparency, and Fairness', topics: ['Privacy, Transparency and Fairness', 'Privacy Act of 1974, Paperwork Reduction Act', 'California Consumer Privacy Act', 'Disclosure requirements', 'General Data Protection Regulation'], readings: [
     { title: 'Privacy-Transparency-Fairness (paper)', url: 'https://digitalgovernmenthub.org/wp-content/uploads/2023/08/Gupta_et_al_Privacy_Bias.pdf' }
   ]},
   { part: 'part1', num: 5, title: 'Other Concerns: Arbitrariness', topics: ['Procedural Fairness'], readings: [
-    { title: 'Procedural Fairness paper', url: 'https://dl.acm.org/doi/10.1145/3531146.3533149' }
+    { title: 'Procedural Fairness paper', url: 'https://dl.acm.org/doi/10.1145/3531146.3533149' },
+    { title: 'Correlated Errors in LLMs', url: 'https://arxiv.org/pdf/2506.07962'}
   ]},
-  { part: 'part2', num: 6, title: 'Case Study: Finance', topics: ['ECOA', 'Industry Practices'], readings: []},
+  { part: 'part2', num: 6, title: 'Case Study: Finance', topics: ['Differences between academic and industry fairness work', 'Compliance with and Enforcement of ECOA disparate impact requirements'], readings: []},
   { part: 'part2', num: 7, title: 'Case Study: Advertising (Housing) and Employment', topics: ['HUD vs Meta', 'VRS', 'Workday'], readings: [
     { title: 'NYTimes coverage', url: 'https://www.nytimes.com/2019/03/28/us/politics/facebook-housing-discrimination.html' },
     { title: 'Workday lawsuit overview', url: 'https://www.fisherphillips.com/en/news-insights/discrimination-lawsuit-over-workdays-ai-hiring-tools-can-proceed-as-class-action-6-things.html' }
