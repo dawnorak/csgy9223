@@ -47,41 +47,61 @@ const schedule = [
   { part: 'part4', num: 14, title: 'Project Presentations', topics: ['Presentations'], readings: []}
 ];
 
-function createLectureItem(item) {
-  const li = document.createElement('li');
-  li.className = 'lecture';
-  li.dataset.part = item.part;
-  li.dataset.search = [item.title, ...(item.topics || [])].join(' ').toLowerCase();
-
-  li.innerHTML = `
-    <div class="num">${item.num}</div>
-    <div>
-      <h3>${item.title} <span class="badge">${item.part.replace('part', 'Part ')}</span></h3>
-      ${item.topics?.length ? `<ul class="meta">${item.topics.map(t => `<li>${t}</li>`).join('')}</ul>` : ''}
-      ${item.readings?.length ? `
-        <div class="label">Readings</div>
-        <ul class="links">${item.readings.map(r => `<li><a href="${r.url}" target="_blank" rel="noopener">${r.title}</a></li>`).join('')}</ul>
-      ` : ''}
-    </div>
-  `;
-  return li;
+// Compute Thursday dates starting 2025-09-04, skip 2025-11-27
+function computeLectureDates(count) {
+  const dates = [];
+  let current = new Date('2025-09-04T00:00:00'); // Thursday
+  const skip = new Date('2025-11-27T00:00:00');
+  while (dates.length < count) {
+    const sameDay = current.getFullYear() === skip.getFullYear() && current.getMonth() === skip.getMonth() && current.getDate() === skip.getDate();
+    if (!sameDay) dates.push(new Date(current));
+    current.setDate(current.getDate() + 7);
+  }
+  return dates;
 }
 
-function renderSchedule(list) {
-  const container = document.getElementById('schedule-list');
-  container.innerHTML = '';
-  list.forEach(item => container.appendChild(createLectureItem(item)));
+function formatDate(d) {
+  const month = d.toLocaleString('en-US', { month: 'short' });
+  const day = d.getDate();
+  return `${month}\u00A0${day}`; // nbsp between month and day
 }
 
-function filterSchedule() {
-  const part = document.getElementById('filter-select').value;
-  const q = document.getElementById('search-input').value.trim().toLowerCase();
-  const filtered = schedule.filter(s => (part === 'all' || s.part === part) && (!q || (s.title + ' ' + (s.topics||[]).join(' ')).toLowerCase().includes(q)));
-  renderSchedule(filtered);
-}
+function renderScheduleTable(list) {
+  const tbody = document.getElementById('schedule-tbody');
+  tbody.innerHTML = '';
+  const dates = computeLectureDates(list.length);
+  list.forEach((item, idx) => {
+    const tr = document.createElement('tr');
+    const week = idx + 1;
+    const date = dates[idx];
+    const homeworkCell = (() => {
+      if (!item.homework) return '';
+      if (typeof item.homework === 'string') {
+        const url = item.homework;
+        return `<a href="${url}" target="_blank" rel="noopener">Homework</a>`;
+      }
+      if (Array.isArray(item.homework)) {
+        return item.homework.map(h => {
+          const title = h.title || 'Homework';
+          const url = h.url || '#';
+          return `<a href="${url}" target="_blank" rel="noopener">${title}</a>`;
+        }).join('<br>');
+      }
+      return '';
+    })();
 
-document.getElementById('filter-select').addEventListener('change', filterSchedule);
-document.getElementById('search-input').addEventListener('input', filterSchedule);
+    const topicsHtml = item.topics?.length ? `<ul class="meta">${item.topics.map(t => `<li>${t}</li>`).join('')}</ul>` : '';
+    const readingsHtml = item.readings?.length ? `<div class="label"><i>Readings:</i></div><ul class="links">${item.readings.map(r => `<li><a href="${r.url}" target="_blank" rel="noopener">${r.title}</a></li>`).join('')}</ul>` : '';
+
+    tr.innerHTML = `
+      <td>${week}</td>
+      <td>${formatDate(date)}</td>
+      <td><strong>${item.title}</strong>${topicsHtml}${readingsHtml}</td>
+      <td>${homeworkCell}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
 
 // Flatten unique readings for the Readings section
 const readingSet = new Map();
@@ -106,6 +126,6 @@ function renderReadings() {
 document.getElementById('reading-search').addEventListener('input', renderReadings);
 
 // Initial render
-renderSchedule(schedule);
+renderScheduleTable(schedule);
 renderReadings();
 

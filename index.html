@@ -25,14 +25,24 @@
   </header>
 
   <main class="container">
+    <section id="overview" class="panel">
+      <h2>Overview</h2>
+      <p>
+        This multidisciplinary course examines social and legal dimensions of harms from traditional and generative AI systems. You will learn to identify unfair, opaque, or otherwise problematic behaviors, conduct fairness audits for black-box and white-box systems, and apply practical techniques to mitigate harms such as discrimination, privacy violations, and arbitrariness. 
+        We will also cover when key laws apply and how to build compliant systems.
+      </p>
+      <p>
+        Through case studies in finance, housing, and employment, plus hands-on coding in Python, you will develop technical and legal tools to assess and improve AI systems in ways that are practically applicable in real organizations.
+      </p>
+    </section>
     <section id="logistics" class="panel">
       <h2>Logistics</h2>
       <div class="grid two">
         <div>
           <ul class="meta">
-            <li><strong>Instructor:</strong> Professor Emily Black (<a href="mailto:eb1850@nyu.edu">eb1850@nyu.edu</a>)</li>
-            <li><strong>Time/Location:</strong> Thu 2:30-4:00 EST, Jacobs Hall Room 301</li>
-            <li><strong>Office Hours:</strong> Thu 4:00-5:00 EST (370 Jay St. office 1155 or Zoom)</li>
+            <li><strong>Instructor:</strong> <a href="https://emblack.github.io/">Emily Black</a> (<a href="mailto:eb1850@nyu.edu">eb1850@nyu.edu</a>)</li>
+            <li><strong>Time/Location:</strong> Thursdays 2:30-4:00 EST, Jacobs Hall Room 301</li>
+            <li><strong>Office Hours:</strong> Thursdays 4:00-5:00 EST (370 Jay St. office 1155 or Zoom)</li>
             <li><strong>TAs:</strong> Rachel Yuan (<a href="mailto:ry1023@nyu.edu">ry1023@nyu.edu</a>), Vaigarai Sathi (<a href="mailto:sv3013@nyu.edu">sv3013@nyu.edu</a>)</li>
           </ul>
         </div>
@@ -42,21 +52,20 @@
     <section id="schedule" class="panel">
       <div class="panel-header">
         <h2>Schedule</h2>
-        <div class="controls">
-          <label>
-            <span class="sr-only">Filter</span>
-            <select id="filter-select">
-              <option value="all">All</option>
-              <option value="part1">Part 1</option>
-              <option value="part2">Part 2</option>
-              <option value="part3">Part 3</option>
-              <option value="part4">Part 4</option>
-            </select>
-          </label>
-          <input id="search-input" type="search" placeholder="Search lectures or topics" aria-label="Search schedule">
-        </div>
       </div>
-      <ol id="schedule-list" class="schedule-list" aria-live="polite"></ol>
+      <div class="table-wrapper">
+        <table class="schedule-table">
+          <thead>
+            <tr>
+              <th>Week</th>
+              <th>Date</th>
+              <th class="absorbing-column">Lecture</th>
+              <th>Homework</th>
+            </tr>
+          </thead>
+          <tbody id="schedule-tbody" aria-live="polite"></tbody>
+        </table>
+      </div>
     </section>
 
     <section id="readings" class="panel">

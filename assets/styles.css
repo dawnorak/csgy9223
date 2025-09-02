@@ -156,3 +156,27 @@ input[type="search"] { width: 240px; }
   border: 0;
 }
 
+/* Schedule table styling */
+.table-wrapper { overflow-x: auto; }
+.schedule-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #0d1726;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+.schedule-table th, .schedule-table td {
+  border-bottom: 1px solid var(--border);
+  padding: 10px 12px;
+  text-align: left;
+  vertical-align: top;
+}
+.schedule-table thead th {
+  background: rgba(124,58,237,0.12);
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+.schedule-table tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+.schedule-table .absorbing-column { width: 60%; }
+
