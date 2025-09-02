@@ -1,0 +1,109 @@
+const yearEl = document.getElementById('year');
+if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+
+// Data extracted and condensed from OUTLINE.md
+const schedule = [
+  { part: 'part1', num: 1, title: 'Responsible AI Introduction', topics: ['Why do we care about fairness and other harms?', 'Common definitions and tools', 'Must-know studies'], readings: [
+    { title: 'Fair ML Book: Classification', url: 'https://fairmlbook.org/classification.html' },
+    { title: 'Fair ML Book: Relative Fairness', url: 'https://fairmlbook.org/relative.html' }
+  ]},
+    { part: 'part1', num: 2, title: 'Pipeline-Aware Responsible AI', topics: ['AI lifecycle and how harms enter', 'Model multiplicity'], readings: [
+    { title: 'Pipeline-aware ML fairness (required)', url: 'https://arxiv.org/abs/2309.17337' }
+  ]},
+  { part: 'part1', num: 3, title: 'Anti-Discrimination Law and AI', topics: ['Disparate Treatment and Impact', 'Federal Housing Act, Equal Credit Opportunity Act, Title VII of the Civil Rights Act', 'State laws: Colorado Insurance Law, others'], readings: [
+    { title: 'Fair ML Book: Legal', url: 'https://fairmlbook.org/legal.html' },
+    { title: 'Race-Aware Algorithms (CLR)', url: 'https://www.californialawreview.org/print/race-aware-algorithms-fairness-nondiscrimination-and-affirmative-action' }
+  ]},
+  { part: 'part1', num: 4, title: 'Privacy, Transparency, and Fairness', topics: ['Privacy, Transparency and Fairness', 'Privacy Act of 1974, Paperwork Reduction Act', 'California Consumer Privacy Act', 'Disclosure requirements', 'General Data Protection Regulation'], readings: [
+    { title: 'Privacy-Transparency-Fairness (paper)', url: 'https://digitalgovernmenthub.org/wp-content/uploads/2023/08/Gupta_et_al_Privacy_Bias.pdf' }
+  ]},
+  { part: 'part1', num: 5, title: 'Other Concerns: Arbitrariness', topics: ['Procedural Fairness'], readings: [
+    { title: 'Procedural Fairness paper', url: 'https://dl.acm.org/doi/10.1145/3531146.3533149' }
+  ]},
+  { part: 'part2', num: 6, title: 'Case Study: Finance', topics: ['ECOA', 'Industry Practices'], readings: []},
+  { part: 'part2', num: 7, title: 'Case Study: Advertising (Housing) and Employment', topics: ['HUD vs Meta', 'VRS', 'Workday'], readings: [
+    { title: 'NYTimes coverage', url: 'https://www.nytimes.com/2019/03/28/us/politics/facebook-housing-discrimination.html' },
+    { title: 'Workday lawsuit overview', url: 'https://www.fisherphillips.com/en/news-insights/discrimination-lawsuit-over-workdays-ai-hiring-tools-can-proceed-as-class-action-6-things.html' }
+  ]},
+  { part: 'part2', num: 8, title: 'Midterm Exam (Tentative) ', topics: ['Topics covered till Lecture 7'], readings: [
+  ]},
+  { part: 'part3', num: 9, title: 'GenAI: Opportunities & Harms', topics: ['Allocative Harms', 'Representational Harms'], readings: [
+    { title: 'Representational Harms paper', url: 'https://dl.acm.org/doi/pdf/10.1145/3531146.3533088' },
+    { title: 'Opportunities and Risks of Foundation Models', url: 'https://arxiv.org/abs/2108.07258' }
+  ]},
+  { part: 'part3', num: 10, title: 'GenAI: Instability & Security', topics: ['Instability in decisionmaking', 'Security threats in GenAI systems'], readings: [
+    { title: 'Auditing LLMs (hiring)', url: 'https://5harad.com/papers/auditing-llms.pdf' },
+    { title: 'Do Large Language Models Discriminate in Hiring Decisions on the Basis of Race, Ethnicity, and Gender?', url: 'https://aclanthology.org/2024.acl-short.37/'}
+  ]},
+  { part: 'part3', num: 11, title: 'GenAI in High-Stakes Decisions', topics: ['UDAP', 'Discrimination Testing for GenAI'], readings: [
+    { title: 'Towards Effective Discrimination Testing for GenAI', url: 'https://arxiv.org/abs/2412.21052' },
+    { title: 'UDAP Overview', url: 'https://www.federalreserve.gov/boarddocs/supmanual/cch/200806/ftca.pdf' },
+    { title: 'Fairness and Privacy in GenAI', url: 'https://journals.library.columbia.edu/index.php/stlr/article/view/12765/6289' }
+  ]},
+  { part: 'part4', num: 12, title: 'Student-Selected Topic', topics: ['TBD based on survey'], readings: []},
+  { part: 'part4', num: 13, title: 'Scheduling Flexibility', topics: ['TBD'], readings: []},
+  { part: 'part4', num: 14, title: 'Project Presentations', topics: ['Presentations'], readings: []}
+];
+
+function createLectureItem(item) {
+  const li = document.createElement('li');
+  li.className = 'lecture';
+  li.dataset.part = item.part;
+  li.dataset.search = [item.title, ...(item.topics || [])].join(' ').toLowerCase();
+
+  li.innerHTML = `
+    <div class="num">${item.num}</div>
+    <div>
+      <h3>${item.title} <span class="badge">${item.part.replace('part', 'Part ')}</span></h3>
+      ${item.topics?.length ? `<ul class="meta">${item.topics.map(t => `<li>${t}</li>`).join('')}</ul>` : ''}
+      ${item.readings?.length ? `
+        <div class="label">Readings</div>
+        <ul class="links">${item.readings.map(r => `<li><a href="${r.url}" target="_blank" rel="noopener">${r.title}</a></li>`).join('')}</ul>
+      ` : ''}
+    </div>
+  `;
+  return li;
+}
+
+function renderSchedule(list) {
+  const container = document.getElementById('schedule-list');
+  container.innerHTML = '';
+  list.forEach(item => container.appendChild(createLectureItem(item)));
+}
+
+function filterSchedule() {
+  const part = document.getElementById('filter-select').value;
+  const q = document.getElementById('search-input').value.trim().toLowerCase();
+  const filtered = schedule.filter(s => (part === 'all' || s.part === part) && (!q || (s.title + ' ' + (s.topics||[]).join(' ')).toLowerCase().includes(q)));
+  renderSchedule(filtered);
+}
+
+document.getElementById('filter-select').addEventListener('change', filterSchedule);
+document.getElementById('search-input').addEventListener('input', filterSchedule);
+
+// Flatten unique readings for the Readings section
+const readingSet = new Map();
+for (const lec of schedule) {
+  for (const r of (lec.readings || [])) {
+    if (!readingSet.has(r.url)) readingSet.set(r.url, r.title);
+  }
+}
+
+function renderReadings() {
+  const q = document.getElementById('reading-search').value.trim().toLowerCase();
+  const list = document.getElementById('reading-list');
+  list.innerHTML = '';
+  for (const [url, title] of readingSet.entries()) {
+    if (q && !(title.toLowerCase().includes(q) || url.toLowerCase().includes(q))) continue;
+    const li = document.createElement('li');
+    li.innerHTML = `<a href="${url}" target="_blank" rel="noopener">${title}</a>`;
+    list.appendChild(li);
+  }
+}
+
+document.getElementById('reading-search').addEventListener('input', renderReadings);
+
+// Initial render
+renderSchedule(schedule);
+renderReadings();
+
