@@ -19,11 +19,11 @@ const schedule = [
     { title: 'Privacy-Transparency-Fairness (paper)', url: 'https://digitalgovernmenthub.org/wp-content/uploads/2023/08/Gupta_et_al_Privacy_Bias.pdf' }
   ]},
   { part: 'part1', num: 5, title: 'Other Concerns: Arbitrariness', topics: ['Procedural Fairness'], readings: [
-    { title: 'Procedural Fairness paper', url: 'https://dl.acm.org/doi/10.1145/3531146.3533149' },
+    { title: 'Procedural Fairness Paper', url: 'https://dl.acm.org/doi/10.1145/3531146.3533149' },
     { title: 'Correlated Errors in LLMs', url: 'https://arxiv.org/pdf/2506.07962'}
   ]},
   { part: 'part2', num: 6, title: 'Case Study: Finance', topics: ['Differences between academic and industry fairness work', 'Compliance with and Enforcement of ECOA disparate impact requirements'], readings: []},
-  { part: 'part2', num: 7, title: 'Case Study: Advertising (Housing) and Employment', topics: ['HUD vs Meta', 'VRS', 'Workday'], readings: [
+  { part: 'part2', num: 7, title: 'Case Study: Advertising (Housing) and Employment (Workday)', topics: ['HUD vs Meta', 'VRS', 'Workday'], readings: [
     { title: 'NYTimes coverage', url: 'https://www.nytimes.com/2019/03/28/us/politics/facebook-housing-discrimination.html' },
     { title: 'Workday lawsuit overview', url: 'https://www.fisherphillips.com/en/news-insights/discrimination-lawsuit-over-workdays-ai-hiring-tools-can-proceed-as-class-action-6-things.html' }
   ]},
