@@ -16,7 +16,7 @@ const schedule = [
     { title: 'Less Discriminatory Algorithms', url: 'https://www.law.georgetown.edu/georgetown-law-journal/in-print/volume-113/volume-113-issue-1-october-2024/less-discriminatory-algorithms/' }
   ]},
   { part: 'part1', num: 4, title: 'Privacy, Transparency, and Fairness', topics: ['Privacy, Transparency and Fairness', 'Privacy Act of 1974, Paperwork Reduction Act', 'California Consumer Privacy Act', 'Disclosure requirements', 'General Data Protection Regulation'], readings: [
-    { title: 'Privacy-Transparency-Fairness (paper)', url: 'https://digitalgovernmenthub.org/wp-content/uploads/2023/08/Gupta_et_al_Privacy_Bias.pdf' }
+    { title: 'Privacy-Transparency-Fairness', url: 'https://digitalgovernmenthub.org/wp-content/uploads/2023/08/Gupta_et_al_Privacy_Bias.pdf' }
   ]},
   { part: 'part1', num: 5, title: 'Other Concerns: Arbitrariness', topics: ['Procedural Fairness'], readings: [
     { title: 'Procedural Fairness Paper', url: 'https://dl.acm.org/doi/10.1145/3531146.3533149' },
